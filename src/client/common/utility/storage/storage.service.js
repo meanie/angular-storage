@@ -85,11 +85,10 @@ angular.module('Utility.Storage.Service', [
 
 		//Validate enabled storage engines
 		for (var e = 0; e < enabledStorageEngines; e++) {
-			var engine = enabledStorageEngines[e],
-					engineService = getServiceName(engine);
+			var engineService = getServiceName(enabledStorageEngines[e]);
 			if (!$injector.has(engineService)) {
 				throw new Error(
-					'Storage engine', engine, 'does not exist.',
+					'Storage engine', enabledStorageEngines[e], 'does not exist.',
 					'Make sure the service', engineService, 'is included as a dependency.'
 				);
 			}
@@ -197,7 +196,7 @@ angular.module('Utility.Storage.Service', [
 			catch (e) {
 				return false;
 			}
-		},
+		};
 
 		/**
 		 * Getter
@@ -301,7 +300,7 @@ angular.module('Utility.Storage.Service', [
 					}
 
 					//Load and cache now
-					return StorageEngines[engine] = new StorageEngine(engine);
+					return (StorageEngines[engine] = new StorageEngine(engine));
 				}
 			});
 		}
