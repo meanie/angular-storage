@@ -35,31 +35,22 @@ angular.module('App').config(function(App, StorageProvider) {
 ```
 Use it in your modules:
 ```js
-//Save something in the default storage engine
+//Save item in storage, optionally specifying a storage engine
 Storage.set('user', user);
-
-//Explicitly specify storage engine
 Storage.set('user', user, 'session');
 
-//Read from storage
+//Read item from storage, optionally specifying a storage engine
 var user = Storage.get('user');
-
-//Read from specific storage engine
 var user = Storage.get('user', 'session');
 
-//Remove from storage
+//Remove an item from storage, optionally specifying a storage engine
 Storage.remove('user');
-
-//Remove from specific storage engine
 Storage.remove('user', 'session');
 
-//Clear everything from storage
+//Clear items from storage, optionally only with a
+//certain prefix or only from a specific storage engine
 Storage.clear();
-
-//Optionally, only clear items with a certain prefix
 Storage.clear('defaults.');
-
-//Clear items from a certain storage engine
 Storage.clear('defaults.', 'session');
 ```
 
