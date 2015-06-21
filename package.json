@@ -1,0 +1,33 @@
+{
+  "name": "meanie-angular-storage",
+  "description": "An Angular service for Meanie projects for easy interaction with local storage, session storage or cookie storage.",
+  "version": "0.0.1",
+  "homepage": "https://github.com/meanie/",
+  "author": {
+    "name": "Adam Buczynski",
+    "email": "me@adambuczynski.com",
+    "url": "http://adambuczynski.com/"
+  },
+  "contributors": [],
+  "license": "MIT",
+  "private": false,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/meanie/angular-storage"
+  },
+  "bugs": {
+    "url": "https://github.com/meanie/angular-storage/issues"
+  },
+  "keywords": [
+    "meanie",
+    "meanie-module",
+    "text",
+    "string",
+    "utility",
+    "angularjs",
+    "filters"
+  ],
+  "files": [
+    "src"
+  ]
+}
