@@ -1,4 +1,4 @@
-# Meanie - Angular Filters
+# Meanie - Angular Storage
 
 [![npm version](https://img.shields.io/npm/v/meanie-angular-storage.svg)](https://www.npmjs.com/package/meanie-angular-storage)
 [![node dependencies](https://david-dm.org/meanie/angular-storage.svg)](https://david-dm.org/meanie/angular-storage)
@@ -27,7 +27,7 @@ Configure if needed:
 angular.module('App').config(function(App, StorageProvider) {
 
   //Set global prefix for stored keys
-	StorageProvider.setPrefix(App.name.toLowerCase());
+  StorageProvider.setPrefix(App.name.toLowerCase());
 
   //Change the default storage engine (defaults to local storage)
   StorageProvider.setDefaultStorageType('session');
