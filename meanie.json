@@ -1,10 +1,11 @@
 {
   "assets": {
     "src": [
-      "src/**/*.js"
+      "src/**/*.js",
+      "!src/**/*.spec.js"
     ],
     "tests": [
-      "tests/**/*.spec.js"
+      "src/**/*.spec.js"
     ],
     "testing": [
       "node_modules/angular/angular.js",

@@ -292,6 +292,7 @@ angular.module('Utility.Storage.Service', [
 		for (e = 0; e < enabledStorageEngines.length; e++) {
 			var engine = enabledStorageEngines[e];
 			Object.defineProperty(Storage, engine, {
+				/*jshint -W083 */
 				get: function() {
 
 					//Cached?
