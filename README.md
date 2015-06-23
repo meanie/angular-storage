@@ -3,6 +3,7 @@
 [![npm version](https://img.shields.io/npm/v/meanie-angular-storage.svg)](https://www.npmjs.com/package/meanie-angular-storage)
 [![node dependencies](https://david-dm.org/meanie/angular-storage.svg)](https://david-dm.org/meanie/angular-storage)
 [![github issues](https://img.shields.io/github/issues/meanie/angular-storage.svg)](https://github.com/meanie/angular-storage/issues)
+[![codacy](https://img.shields.io/codacy/14397099f5a64075bf7b1a573088d3cf.svg)](https://www.codacy.com/app/meanie/angular-storage)
 [![Join the chat at https://gitter.im/meanie/meanie](https://img.shields.io/badge/gitter-join%20chat%20%E2%86%92-brightgreen.svg)](https://gitter.im/meanie/meanie?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 An Angular service for [Meanie](https://github.com/meanie/meanie) projects for easy interaction with local storage, session storage or cookie storage.
@@ -54,15 +55,13 @@ Storage.clear('defaults.');
 Storage.clear('defaults.', 'session');
 ```
 
-## Issues and feature requests
-Please report all bugs, issues, suggestions and feature requests in the project [issue tracker](https://github.com/meanie/angular-storage/issues).
+## Issues & feature requests
+Please report any bugs, issues, suggestions and feature requests in the appropriate issue tracker:
+* [Meanie Angular Storage issue tracker](https://github.com/meanie/angular-storage/issues)
+* [Meanie Boilerplate issue tracker](https://github.com/meanie/boilerplate/issues)
+* [Meanie CLI issue tracker](https://github.com/meanie/meanie/issues)
 
-## What is Meanie?
-Meanie is a boilerplate for developing, testing and building full-stack modular javascript applications using MEAN (MongoDB, Express, AngularJS and Node.js). Meanie is powered by the Gulp task runner.
-
-* [Meanie @ npm](https://www.npmjs.com/package/meanie)
-* [Meanie @ github](https://github.com/meanie/meanie)
-
+## Contributing
 If you would like to contribute to Meanie, please check out the [Meanie contributing guidelines](https://github.com/meanie/meanie/blob/master/CONTRIBUTING.md).
 
 ## License
