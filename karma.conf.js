@@ -1,10 +1,5 @@
 
 /**
- * Assets
- */
-var assets = require('./meanie').assets;
-
-/**
  * Karma configuration
  */
 module.exports = function(config) {
