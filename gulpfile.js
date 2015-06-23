@@ -6,7 +6,9 @@
 var gulp = require('gulp');
 var karma = require('gulp-karma');
 var jshint = require('gulp-jshint');
+var jasmine = require('gulp-jasmine');
 var stylish = require('jshint-stylish');
+var jasminereporter = require('jasmine-spec-reporter');
 
 /**
  * Assets

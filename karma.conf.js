@@ -17,7 +17,7 @@ module.exports = function(config) {
     frameworks: ['jasmine'],
 
     //Test results reporter to use (see https://npmjs.org/browse/keyword/karma-reporter)
-    reporters: ['dots'],
+    reporters: ['spec'],
 
     //Web server port
     port: 9876,
