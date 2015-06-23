@@ -32,10 +32,36 @@ describe('MemoryStorage', function() {
 	});
 
 	/**
-	 * Functionality
+	 * Storing
 	 */
-	describe('functionality', function() {
+	describe('storing functionality', function() {
 
-	
+		//Set test key
+		var testKey;
+	  beforeEach(function() {
+	    testKey = 'test';
+	  });
+
+		/**
+		 * String values
+		 */
+		it('should be able to store string values', function() {
+			var testValue = 'test';
+			MemoryStorage.set(testKey, testValue);
+			var storedValue = MemoryStorage.get(testKey);
+			expect(storedValue).toBe(testValue);
+			expect(typeof storedValue).toBe(typeof testValue);
+		});
+
+		/**
+		 * Overriding values
+		 */
+		it('should override values set with the same key', function() {
+			MemoryStorage.set(testKey, 'a');
+			MemoryStorage.set(testKey, 'b');
+			MemoryStorage.set(testKey, 'c');
+			var storedValue = MemoryStorage.get(testKey);
+			expect(storedValue).toBe('c');
+		});
 	});
 });
