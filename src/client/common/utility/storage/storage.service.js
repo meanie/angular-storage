@@ -120,6 +120,13 @@ angular.module('Utility.Storage.Service', [
 		}
 
 		/**
+		 * Test if a string is an object/array
+		 */
+		function isStringObject(string) {
+			return (string.charAt(0) === '{' || string.charAt(0) === '[');
+		}
+
+		/**
 		 * Helper to parse a value for storage
 		 */
 		function parseValue(value) {
@@ -149,7 +156,7 @@ angular.module('Utility.Storage.Service', [
 			}
 
 			//Parse from JSON if needed
-			if (value.charAt(0) == '{' || value.charAt(0) == '[' || isStringNumber(value)) {
+			if (isStringObject(value) || isStringNumber(value)) {
 				try {
 					return angular.fromJson(value);
 				}
