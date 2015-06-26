@@ -9,10 +9,10 @@ angular.module('Utility.Storage.Engines.SessionStorage.Service', [])
  */
 .factory('SessionStorage', function SessionStorage($window) {
 
-	/**
-	 * Storage engine interface
-	 */
-	return {
+  /**
+   * Storage engine interface
+   */
+  return {
 
     /**
      * Check if supported
@@ -28,7 +28,7 @@ angular.module('Utility.Storage.Engines.SessionStorage.Service', [])
         $window.sessionStorage.removeItem(key);
         return true;
       }
-      catch(e) {
+      catch (e) {
         return false;
       }
     },
@@ -54,21 +54,21 @@ angular.module('Utility.Storage.Engines.SessionStorage.Service', [])
       $window.sessionStorage.removeItem(key);
     },
 
-		/**
-		 * Clear items
-		 */
-		clear: function(prefix) {
+    /**
+     * Clear items
+     */
+    clear: function(prefix) {
 
-			//Get regex for prefix and keys
-			var prefixRegex = prefix ? new RegExp('^' + prefix) : null,
-					keys = Object.keys($window.sessionStorage);
+      //Get regex for prefix and keys
+      var prefixRegex = prefix ? new RegExp('^' + prefix) : null;
+      var keys = Object.keys($window.sessionStorage);
 
-			//Loop keys
-			for (var k = 0; k < keys.length; k++) {
-				if (!prefix || prefixRegex.test(keys[k])) {
-					$window.sessionStorage.removeItem(keys[k]);
-				}
-			}
-		}
+      //Loop keys
+      for (var k = 0; k < keys.length; k++) {
+        if (!prefix || prefixRegex.test(keys[k])) {
+          $window.sessionStorage.removeItem(keys[k]);
+        }
+      }
+    }
   };
 });
