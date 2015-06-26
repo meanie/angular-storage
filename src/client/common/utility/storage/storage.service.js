@@ -1,3 +1,4 @@
+/*jshint latedef: nofunc */
 
 /**
  * Module definition and dependencies
@@ -256,32 +257,6 @@ angular.module('Utility.Storage.Service', [
 		StorageEngine.prototype.clear = function(prefix) {
 			prefix = storagePrefix + (prefix || '');
 			this.engine.clear(prefix);
-		};
-
-		/**
-		 * Bind a scope variable to storage
-		 */
-		StorageEngine.prototype.bind = function(scope, variable, storageKey) {
-
-			//Use variable name if storage key not provideed
-			storageKey = storageKey || variable;
-
-			//Check if value is present in storage
-			var value = this.engine.get(storageKey),
-					self = this;
-
-			//If not present, check if present in scope already
-			if (value === null && variable in scope) {
-				value = scope[variable];
-			}
-
-			//Assign to scope
-			$parse(variable).assign(scope, value);
-
-			//Set watch
-			return scope.$watch(key, function(newValue) {
-				self.set(storageKey, newValue);
-			}, angular.isObject(scope[variable]));
 		};
 
 		/*****************************************************************************
