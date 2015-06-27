@@ -4,9 +4,7 @@
   "maxErrors": 100,
   "verbose": true,
   "excludeFiles": [
-    "public/**",
-    "node_modules/**",
-    "client/vendor/**"
+    "node_modules/**"
   ],
 
   "requireParenthesesAroundIIFE": true,
