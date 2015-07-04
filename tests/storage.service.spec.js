@@ -7,10 +7,10 @@ describe('Storage', function() {
 
   //Load module and service
   beforeEach(module('Utility.Storage.Service'));
-  beforeEach(module('Utility.Storage.Engines.MemoryStorage.Service'));
-  beforeEach(module('Utility.Storage.Engines.SessionStorage.Service'));
-  beforeEach(module('Utility.Storage.Engines.LocalStorage.Service'));
-  beforeEach(module('Utility.Storage.Engines.CookieStorage.Service'));
+  beforeEach(module('Utility.Storage.MemoryStorage.Service'));
+  beforeEach(module('Utility.Storage.SessionStorage.Service'));
+  beforeEach(module('Utility.Storage.LocalStorage.Service'));
+  beforeEach(module('Utility.Storage.CookieStorage.Service'));
 
   //Inject storage
   var Storage;

@@ -2,7 +2,7 @@
 /**
  * Module definition and dependencies
  */
-angular.module('Utility.Storage.Engines.CookieStorage.Service', [])
+angular.module('Utility.Storage.CookieStorage.Service', [])
 
 /**
  * Cookie storage engine service

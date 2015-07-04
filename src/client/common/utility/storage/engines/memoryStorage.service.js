@@ -2,7 +2,7 @@
 /**
  * Module definition and dependencies
  */
-angular.module('Utility.Storage.Engines.MemoryStorage.Service', [])
+angular.module('Utility.Storage.MemoryStorage.Service', [])
 
 /**
  * Memory storage engine service

@@ -20,7 +20,7 @@ meanie install angular-storage
 Include the service as a dependency:
 ```js
 angular.module('App.YourModule', [
-  'Common.Utility.Storage.Service'
+  'Utility.Storage.Service'
 ]);
 ```
 Configure if needed:

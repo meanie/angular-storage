@@ -3,10 +3,10 @@
  * Module definition and dependencies
  */
 angular.module('Utility.Storage.Service', [
-  'Utility.Storage.Engines.MemoryStorage.Service',
-  'Utility.Storage.Engines.CookieStorage.Service',
-  'Utility.Storage.Engines.SessionStorage.Service',
-  'Utility.Storage.Engines.LocalStorage.Service'
+  'Utility.Storage.MemoryStorage.Service',
+  'Utility.Storage.CookieStorage.Service',
+  'Utility.Storage.SessionStorage.Service',
+  'Utility.Storage.LocalStorage.Service'
 ])
 
 /**
