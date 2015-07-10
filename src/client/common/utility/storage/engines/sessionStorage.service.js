@@ -7,7 +7,7 @@ angular.module('Utility.Storage.SessionStorage.Service', [])
 /**
  * Session storage engine service
  */
-.factory('SessionStorage', function SessionStorage($window) {
+.factory('$sessionStorage', function $sessionStorage($window) {
 
   /**
    * Storage engine interface

@@ -12,7 +12,7 @@ angular.module('Utility.Storage.Service', [
 /**
  * Provider definition
  */
-.provider('Storage', function StorageProvider() {
+.provider('$storage', function $storageProvider() {
 
   /**
    * Global prefix
@@ -79,7 +79,7 @@ angular.module('Utility.Storage.Service', [
      * Get storage engine service name
      */
     function getEngineServiceName(engine) {
-      return engine[0].toUpperCase() + engine.substr(1) + 'Storage';
+      return '$' + engine + 'Storage';
     }
 
     /**

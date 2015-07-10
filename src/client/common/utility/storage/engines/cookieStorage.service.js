@@ -7,7 +7,7 @@ angular.module('Utility.Storage.CookieStorage.Service', [])
 /**
  * Cookie storage engine service
  */
-.factory('CookieStorage', function CookieStorage($injector) {
+.factory('$cookieStorage', function $cookieStorage($injector) {
 
   //Get cookies service
   var $cookies;

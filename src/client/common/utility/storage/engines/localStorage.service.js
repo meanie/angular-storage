@@ -7,7 +7,7 @@ angular.module('Utility.Storage.LocalStorage.Service', [])
 /**
  * Local storage engine service
  */
-.factory('LocalStorage', function LocalStorage($window) {
+.factory('$localStorage', function $localStorage($window) {
 
   /**
    * Storage engine interface

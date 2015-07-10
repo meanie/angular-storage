@@ -14,9 +14,9 @@ describe('Storage', function() {
   beforeEach(module('ngCookies'));
 
   //Inject storage
-  var Storage;
-  beforeEach(inject(function(_Storage_) {
-    Storage = _Storage_;
+  var $storage;
+  beforeEach(inject(function(_$storage_) {
+    $storage = _$storage_;
   }));
 
   //Storage engines
@@ -29,7 +29,7 @@ describe('Storage', function() {
     var engine = engines[i];
     var StorageEngine;
     beforeEach(function() {
-      StorageEngine = Storage[engine];
+      StorageEngine = $storage[engine];
     });
 
     /**

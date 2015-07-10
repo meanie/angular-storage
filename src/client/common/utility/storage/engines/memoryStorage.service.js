@@ -7,7 +7,7 @@ angular.module('Utility.Storage.MemoryStorage.Service', [])
 /**
  * Memory storage engine service
  */
-.factory('MemoryStorage', function MemoryStorage() {
+.factory('$memoryStorage', function $memoryStorage() {
 
   /**
    * Store
