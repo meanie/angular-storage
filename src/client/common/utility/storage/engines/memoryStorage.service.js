@@ -20,10 +20,17 @@ angular.module('Utility.Storage.MemoryStorage.Service', [])
   return {
 
     /**
-     * Check if supported
+     * Always supported
      */
     isSupported: function() {
       return true;
+    },
+
+    /**
+     * Get fallback engine
+     */
+    getFallbackEngine: function() {
+      return '';
     },
 
     /**

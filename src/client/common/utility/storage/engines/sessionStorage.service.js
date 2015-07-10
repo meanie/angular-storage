@@ -34,6 +34,13 @@ angular.module('Utility.Storage.SessionStorage.Service', [])
     },
 
     /**
+     * Get fallback engine
+     */
+    getFallbackEngine: function() {
+      return 'memory';
+    },
+
+    /**
      * Set an item
      */
     set: function(key, value) {

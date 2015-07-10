@@ -31,6 +31,13 @@ angular.module('Utility.Storage.CookieStorage.Service', [])
     },
 
     /**
+     * Get fallback engine
+     */
+    getFallbackEngine: function() {
+      return 'memory';
+    },
+
+    /**
      * Set an item
      */
     set: function(key, value) {

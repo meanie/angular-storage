@@ -34,6 +34,13 @@ angular.module('Utility.Storage.LocalStorage.Service', [])
     },
 
     /**
+     * Get fallback engine
+     */
+    getFallbackEngine: function() {
+      return 'cookie';
+    },
+
+    /**
      * Set an item
      */
     set: function(key, value) {

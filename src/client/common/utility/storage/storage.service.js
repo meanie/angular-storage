@@ -72,18 +72,59 @@ angular.module('Utility.Storage.Service', [
     var enabledStorageEngines = this.enabledStorageEngines;
     var defaultStorageEngine = this.defaultStorageEngine;
 
+    //Cached engine service instances
+    var engineServices = {};
+
     /**
      * Get storage engine service name
      */
-    function getServiceName(engine) {
+    function getEngineServiceName(engine) {
       return engine[0].toUpperCase() + engine.substr(1) + 'Storage';
+    }
+
+    /**
+     * Get storage engine service instance
+     */
+    function getEngineService(engine) {
+
+      //Cached?
+      if (engineServices[engine]) {
+        return engineServices[engine];
+      }
+
+      //Get the engine service
+      var serviceName = getEngineServiceName(engine);
+      var engineService = $injector.get(serviceName);
+
+      //Not supported
+      if (engine !== 'memory' && !engineService.isSupported()) {
+
+        //Determine fallback
+        var fallback;
+        if (angular.isFunction(engineService.getFallbackEngine)) {
+          fallback = engineService.getFallbackEngine();
+        }
+
+        //Validate fallback and log warning
+        fallback = fallback || 'memory';
+        console.warn(
+          'Storage engine', engine, 'not supported in this browser.',
+          'Using fallback engine', fallback, 'instead.'
+        );
+
+        //Get fallback engine
+        engineService = getEngineService(fallback);
+      }
+
+      //Cache and return the service
+      return (engineServices[engine] = engineService);
     }
 
     /**
      * Get prefixed key
      */
     function getPrefixedKey(key) {
-      return storagePrefix + key;
+      return key ? (storagePrefix + key) : '';
     }
 
     /**
@@ -106,7 +147,7 @@ angular.module('Utility.Storage.Service', [
     function parseValue(value) {
 
       //Normalize undefined values
-      if (angular.isUndefined(value)) {
+      if (angular.isUndefined(value) || value === null) {
         return null;
       }
 
@@ -124,8 +165,8 @@ angular.module('Utility.Storage.Service', [
      */
     function formatValue(value) {
 
-      //Null values
-      if (!value || value === null) {
+      //Null values (also convert string null value)
+      if (!value || value === null || value === 'null') {
         return null;
       }
 
@@ -155,15 +196,15 @@ angular.module('Utility.Storage.Service', [
     }
 
     //Validate enabled storage engines
-    for (var e = 0; e < enabledStorageEngines; e++) {
-      var engineService = getServiceName(enabledStorageEngines[e]);
-      if (!$injector.has(engineService)) {
+    angular.forEach(enabledStorageEngines, function(engine) {
+      var serviceName = getEngineServiceName(engine);
+      if (!$injector.has(serviceName)) {
         throw new Error(
-          'Storage engine', enabledStorageEngines[e], 'does not exist.',
-          'Make sure the service', engineService, 'is included as a dependency.'
+          'Storage engine', engine, 'does not exist.',
+          'Make sure the service', serviceName, 'is included as a dependency.'
         );
       }
-    }
+    });
 
     /*****************************************************************************
      * Storage engine instances class
@@ -173,8 +214,7 @@ angular.module('Utility.Storage.Service', [
      * Storage engine instance constructor
      */
     var StorageEngine = function(engine) {
-      var engineService = getServiceName(engine);
-      this.engine = $injector.get(engineService);
+      this.engine = getEngineService(engine);
     };
 
     /**
@@ -182,13 +222,13 @@ angular.module('Utility.Storage.Service', [
      */
     StorageEngine.prototype.set = function(key, value) {
 
-      //Must have key
+      //Must have a key
+      key = getPrefixedKey(key);
       if (!key) {
-        return;
+        return false;
       }
 
-      //Get prefixed key and parse value
-      key = getPrefixedKey(key);
+      //Parse value
       value = parseValue(value);
 
       //Store value
@@ -204,22 +244,29 @@ angular.module('Utility.Storage.Service', [
     /**
      * Getter
      */
-    StorageEngine.prototype.get = function(key) {
+    StorageEngine.prototype.get = function(key, defaultValue) {
 
-      //Must have a key
-      if (!key) {
-        return null;
+      //Default value of default value is set to null (defaultvalueception!)
+      if (typeof defaultValue === 'undefined') {
+        defaultValue = null;
       }
 
-      //Get prefixed key
+      //Must have a key
       key = getPrefixedKey(key);
+      if (!key) {
+        return defaultValue;
+      }
 
       //Get value and return formatted
       try {
-        return formatValue(this.engine.get(key));
+        var value = this.engine.get(key);
+        if (value === null) {
+          return defaultValue;
+        }
+        return formatValue(value);
       }
       catch (e) {
-        return null;
+        return defaultValue;
       }
     };
 
@@ -229,12 +276,10 @@ angular.module('Utility.Storage.Service', [
     StorageEngine.prototype.remove = function(key) {
 
       //Must have a key
+      key = getPrefixedKey(key);
       if (!key) {
         return false;
       }
-
-      //Get prefixed key
-      key = getPrefixedKey(key);
 
       //Remove
       try {
@@ -255,33 +300,29 @@ angular.module('Utility.Storage.Service', [
     };
 
     /*****************************************************************************
-     * Exposed storage service class
+     * Exposed storage service
      ***/
 
-    //Create default storage engine service and initialize cache for other engines
+    //Create default storage engine service and initialize engines cache
     var Storage = new StorageEngine(defaultStorageEngine);
     var StorageEngines = {};
 
-    //Store ourselves in the cache
+    //Store ourselves in the cache as the default storage engine
     StorageEngines[defaultStorageEngine] = Storage;
 
     //Create dynamic properties for all enabled storage engines
-    for (e = 0; e < enabledStorageEngines.length; e++) {
-      var engine = enabledStorageEngines[e];
+    angular.forEach(enabledStorageEngines, function(engine) {
       Object.defineProperty(Storage, engine, {
+
         /*jshint -W083 */
         get: function() {
-
-          //Cached?
           if (StorageEngines[engine]) {
             return StorageEngines[engine];
           }
-
-          //Load and cache now
           return (StorageEngines[engine] = new StorageEngine(engine));
         }
       });
-    }
+    });
 
     //Return
     return Storage;

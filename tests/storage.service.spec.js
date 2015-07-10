@@ -11,6 +11,7 @@ describe('Storage', function() {
   beforeEach(module('Utility.Storage.SessionStorage.Service'));
   beforeEach(module('Utility.Storage.LocalStorage.Service'));
   beforeEach(module('Utility.Storage.CookieStorage.Service'));
+  beforeEach(module('ngCookies'));
 
   //Inject storage
   var Storage;
