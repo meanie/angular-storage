@@ -27,7 +27,7 @@ angular.module('App.MyModule', [
 ```
 Configure if needed:
 ```js
-angular.module('App').config(function(App, $storageProvider) {
+angular.module('App').config(function($storageProvider, App) {
 
   //Set global prefix for stored keys
   $storageProvider.setPrefix(App.name.toLowerCase());
