@@ -17,42 +17,57 @@ meanie install angular-storage
 ```
 
 ## Usage
-Include the service as a dependency:
+Include the service as a dependency and inject it into your modules:
 ```js
-angular.module('App.YourModule', [
+angular.module('App.MyModule', [
   'Utility.Storage.Service'
-]);
+]).controller('MyController', function($storage) {
+  //Use the $storage service
+});
 ```
 Configure if needed:
 ```js
-angular.module('App').config(function(App, StorageProvider) {
+angular.module('App').config(function(App, $storageProvider) {
 
   //Set global prefix for stored keys
-  StorageProvider.setPrefix(App.name.toLowerCase());
+  $storageProvider.setPrefix(App.name.toLowerCase());
 
-  //Change the default storage engine (defaults to local storage)
-  StorageProvider.setDefaultStorageType('session');
+  //Change the default storage engine
+  //Defaults to 'local'
+  $storageProvider.setDefaultStorageType('session');
+
+  //Change the enabled storage engines
+  //Defaults to ['memory', 'cookie', 'session', 'local']
+  $storageProvider.setEnabledStorageEngines(['local', 'session', 'custom']);
 });
 ```
 Use it in your modules:
 ```js
-//Save item in storage, optionally specifying a storage engine
-Storage.set('user', user);
-Storage.set('user', user, 'session');
+//Set item in storage
+$storage.set('user', user); //Set in default storage
+$storage.local.set('user', user); //Set in local storage
+$storage.session.set('user', user); //Set in session storage
 
-//Read item from storage, optionally specifying a storage engine
-var user = Storage.get('user');
-var user = Storage.get('user', 'session');
+//Get item from storage
+$storage.get('user'); //Get from default storage
+$storage.local.get('user'); //Get from local storage
+$storage.session.get('user'); //Get from session storage
 
-//Remove an item from storage, optionally specifying a storage engine
-Storage.remove('user');
-Storage.remove('user', 'session');
+//Get with default value in case requested value is not set or null
+$storage.get('user', defaultUser);
 
-//Clear items from storage, optionally only with a
-//certain prefix or only from a specific storage engine
-Storage.clear();
-Storage.clear('defaults.');
-Storage.clear('defaults.', 'session');
+//Remove an item from storage
+$storage.remove('user'); //Remove from default storage
+$storage.local.remove('user'); //Remove from local storage
+$storage.session.remove('user'); //Remove from session storage
+
+//Clear items from storage
+$storage.clear(); //Clear default storage
+$storage.local.clear(); //Clear local storage
+$storage.session.clear(); //Clear session storage
+
+//Clear items with a certain prefix only
+$storage.clear('defaults.');
 ```
 
 ## Issues & feature requests
