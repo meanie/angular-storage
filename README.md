@@ -1,70 +1,124 @@
-# Meanie - Angular Storage
+# meanie-angular-storage
 
 [![npm version](https://img.shields.io/npm/v/meanie-angular-storage.svg)](https://www.npmjs.com/package/meanie-angular-storage)
 [![node dependencies](https://david-dm.org/meanie/angular-storage.svg)](https://david-dm.org/meanie/angular-storage)
 [![github issues](https://img.shields.io/github/issues/meanie/angular-storage.svg)](https://github.com/meanie/angular-storage/issues)
-[![codacy](https://img.shields.io/codacy/14397099f5a64075bf7b1a573088d3cf.svg)](https://www.codacy.com/app/meanie/angular-storage)
+[![codacy](https://img.shields.io/codacy/52a227e315104dc48b9e8d715e23f088.svg)](https://www.codacy.com/app/meanie/angular-storage)
 [![Join the chat at https://gitter.im/meanie/meanie](https://img.shields.io/badge/gitter-join%20chat%20%E2%86%92-brightgreen.svg)](https://gitter.im/meanie/meanie?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-An Angular service for [Meanie](https://github.com/meanie/meanie) projects for easy interaction with local storage, session storage or cookie storage.
+AngularJS module for interacting with local storage, session storage and cookie storage
 
 The storage service automatically parses objects or arrays to and from JSON, and preserves numbers and integers as well.
 
 ## Installation
-Install using the [Meanie CLI](https://www.npmjs.com/package/meanie):
+
+You can install this package using `meanie`, `npm` or `bower`.
+
+### meanie
+
 ```shell
 meanie install angular-storage
 ```
 
-## Usage
-Include the service as a dependency:
+Then add `Storage.Service` as a dependency for your app:
+
 ```js
-angular.module('App.YourModule', [
-  'Common.Utility.Storage.Service'
-]);
+angular.module('App.MyModule', ['Storage.Service']);
 ```
-Configure if needed:
+
+### npm
+
+```shell
+npm install meanie-angular-storage
+```
+
+Then add as a dependency for your app:
+
 ```js
-angular.module('App').config(function(App, StorageProvider) {
+angular.module('App.MyModule', [require('meanie-angular-storage')]);
+```
+
+### bower
+
+```shell
+bower install meanie-angular-storage
+```
+
+Add a `<script>` to your `index.html`:
+
+```html
+<script src="/bower_components/meanie-angular-storage/release/meanie-angular-storage.js"></script>
+```
+
+Then add `Storage.Service` as a dependency for your app:
+
+```js
+angular.module('App.MyModule', ['Storage.Service']);
+```
+
+## Configuration
+
+```js
+angular.module('App').config(function($storageProvider, App) {
 
   //Set global prefix for stored keys
-  StorageProvider.setPrefix(App.name.toLowerCase());
+  $storageProvider.setPrefix(App.name.toLowerCase());
 
-  //Change the default storage engine (defaults to local storage)
-  StorageProvider.setDefaultStorageType('session');
+  //Change the default storage engine
+  //Defaults to 'local'
+  $storageProvider.setDefaultStorageType('session');
+
+  //Change the enabled storage engines
+  //Defaults to ['memory', 'cookie', 'session', 'local']
+  $storageProvider.setEnabledStorageEngines(['local', 'session', 'custom']);
 });
 ```
-Use it in your modules:
+
+## Usage
+
 ```js
-//Save item in storage, optionally specifying a storage engine
-Storage.set('user', user);
-Storage.set('user', user, 'session');
+angular.module('App.MyModule').controller('MyController', function($storage) {
 
-//Read item from storage, optionally specifying a storage engine
-var user = Storage.get('user');
-var user = Storage.get('user', 'session');
+  //Set item in storage
+  $storage.set('user', user); //Set in default storage
+  $storage.local.set('user', user); //Set in local storage
+  $storage.session.set('user', user); //Set in session storage
 
-//Remove an item from storage, optionally specifying a storage engine
-Storage.remove('user');
-Storage.remove('user', 'session');
+  //Get item from storage
+  $storage.get('user'); //Get from default storage
+  $storage.local.get('user'); //Get from local storage
+  $storage.session.get('user'); //Get from session storage
 
-//Clear items from storage, optionally only with a
-//certain prefix or only from a specific storage engine
-Storage.clear();
-Storage.clear('defaults.');
-Storage.clear('defaults.', 'session');
+  //Get with default value in case requested value is not set or null
+  $storage.get('user', defaultUser);
+
+  //Remove an item from storage
+  $storage.remove('user'); //Remove from default storage
+  $storage.local.remove('user'); //Remove from local storage
+  $storage.session.remove('user'); //Remove from session storage
+
+  //Clear items from storage
+  $storage.clear(); //Clear default storage
+  $storage.local.clear(); //Clear local storage
+  $storage.session.clear(); //Clear session storage
+
+  //Clear items with a certain prefix only
+  $storage.clear('defaults.');
+});
 ```
 
 ## Issues & feature requests
-Please report any bugs, issues, suggestions and feature requests in the appropriate issue tracker:
-* [Meanie Angular Storage issue tracker](https://github.com/meanie/angular-storage/issues)
-* [Meanie Boilerplate issue tracker](https://github.com/meanie/boilerplate/issues)
-* [Meanie CLI issue tracker](https://github.com/meanie/meanie/issues)
+
+Please report any bugs, issues, suggestions and feature requests in the [meanie-angular-storage issue tracker](https://github.com/meanie/angular-storage/issues).
 
 ## Contributing
+
+Pull requests are welcome! Please create them against the [dev branch](https://github.com/meanie/angular-storage/tree/dev) of the repository.
+
 If you would like to contribute to Meanie, please check out the [Meanie contributing guidelines](https://github.com/meanie/meanie/blob/master/CONTRIBUTING.md).
 
 ## License
+
 (MIT License)
 
 Copyright 2015, [Adam Buczynski](http://adambuczynski.com)

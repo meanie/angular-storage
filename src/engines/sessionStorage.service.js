@@ -2,17 +2,17 @@
 /**
  * Module definition and dependencies
  */
-angular.module('Utility.Storage.Engines.SessionStorage.Service', [])
+angular.module('Storage.SessionStorage.Service', [])
 
 /**
  * Session storage engine service
  */
-.factory('SessionStorage', function SessionStorage($window) {
+.factory('$sessionStorage', function $sessionStorage($window) {
 
-	/**
-	 * Storage engine interface
-	 */
-	return {
+  /**
+   * Storage engine interface
+   */
+  return {
 
     /**
      * Check if supported
@@ -28,9 +28,16 @@ angular.module('Utility.Storage.Engines.SessionStorage.Service', [])
         $window.sessionStorage.removeItem(key);
         return true;
       }
-      catch(e) {
+      catch (e) {
         return false;
       }
+    },
+
+    /**
+     * Get fallback engine
+     */
+    getFallbackEngine: function() {
+      return 'memory';
     },
 
     /**
@@ -54,21 +61,21 @@ angular.module('Utility.Storage.Engines.SessionStorage.Service', [])
       $window.sessionStorage.removeItem(key);
     },
 
-		/**
-		 * Clear items
-		 */
-		clear: function(prefix) {
+    /**
+     * Clear items
+     */
+    clear: function(prefix) {
 
-			//Get regex for prefix and keys
-			var prefixRegex = prefix ? new RegExp('^' + prefix) : null,
-					keys = Object.keys($window.sessionStorage);
+      //Get regex for prefix and keys
+      var prefixRegex = prefix ? new RegExp('^' + prefix) : null;
+      var keys = Object.keys($window.sessionStorage);
 
-			//Loop keys
-			for (var k = 0; k < keys.length; k++) {
-				if (!prefix || prefixRegex.test(keys[k])) {
-					$window.sessionStorage.removeItem(keys[k]);
-				}
-			}
-		}
+      //Loop keys
+      for (var k = 0; k < keys.length; k++) {
+        if (!prefix || prefixRegex.test(keys[k])) {
+          $window.sessionStorage.removeItem(keys[k]);
+        }
+      }
+    }
   };
 });
