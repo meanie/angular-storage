@@ -1,0 +1,15 @@
+{
+  "name": "meanie-angular-storage",
+  "version": "0.6.0",
+  "main": "./release/meanie-angular-storage.js",
+  "ignore": [
+    "**/.*",
+    "gulpfile.js",
+    "karma.conf.js",
+    "src",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.4.3"
+  }
+}

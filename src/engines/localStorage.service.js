@@ -2,7 +2,7 @@
 /**
  * Module definition and dependencies
  */
-angular.module('Utility.Storage.LocalStorage.Service', [])
+angular.module('Storage.LocalStorage.Service', [])
 
 /**
  * Local storage engine service

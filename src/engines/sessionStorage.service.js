@@ -2,7 +2,7 @@
 /**
  * Module definition and dependencies
  */
-angular.module('Utility.Storage.SessionStorage.Service', [])
+angular.module('Storage.SessionStorage.Service', [])
 
 /**
  * Session storage engine service

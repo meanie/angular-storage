@@ -2,11 +2,11 @@
 /**
  * Module definition and dependencies
  */
-angular.module('Utility.Storage.Service', [
-  'Utility.Storage.MemoryStorage.Service',
-  'Utility.Storage.CookieStorage.Service',
-  'Utility.Storage.SessionStorage.Service',
-  'Utility.Storage.LocalStorage.Service'
+angular.module('Storage.Service', [
+  'Storage.MemoryStorage.Service',
+  'Storage.CookieStorage.Service',
+  'Storage.SessionStorage.Service',
+  'Storage.LocalStorage.Service'
 ])
 
 /**
