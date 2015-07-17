@@ -73,7 +73,7 @@ angular.module('Storage.Service', [
   /**
    * Service getter
    */
-  this.$get = ["$parse", "$injector", function($parse, $injector) {
+  this.$get = ['$parse', '$injector', function($parse, $injector) {
 
     //Set configuration vars locally
     var storagePrefix = this.prefix;
@@ -349,7 +349,7 @@ angular.module('Storage.CookieStorage.Service', [])
 /**
  * Cookie storage engine service
  */
-.factory('$cookieStorage', ["$injector", function $cookieStorage($injector) {
+.factory('$cookieStorage', ['$injector', function $cookieStorage($injector) {
 
   //Get cookies service
   var $cookies;
@@ -432,7 +432,7 @@ angular.module('Storage.LocalStorage.Service', [])
 /**
  * Local storage engine service
  */
-.factory('$localStorage', ["$window", function $localStorage($window) {
+.factory('$localStorage', ['$window', function $localStorage($window) {
 
   /**
    * Storage engine interface
@@ -600,7 +600,7 @@ angular.module('Storage.SessionStorage.Service', [])
 /**
  * Session storage engine service
  */
-.factory('$sessionStorage', ["$window", function $sessionStorage($window) {
+.factory('$sessionStorage', ['$window', function $sessionStorage($window) {
 
   /**
    * Storage engine interface
