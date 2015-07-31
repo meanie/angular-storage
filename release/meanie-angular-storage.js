@@ -1,11 +1,11 @@
 /**
- * meanie-angular-storage - v0.6.2 - 17-6-2015
+ * meanie-angular-storage - v0.6.5 - 31-6-2015
  * https://github.com/meanie/angular-storage
  *
  * Copyright (c) 2015 Adam Buczynski <me@adambuczynski.com>
  * License: MIT
  */
-(function (window, angular, undefined) {'use strict';
+(function(window, angular, undefined) {'use strict';
 
 /**
  * Module definition and dependencies
@@ -339,7 +339,7 @@ angular.module('Storage.Service', [
 
 })(window, window.angular);
 
-(function (window, angular, undefined) {'use strict';
+(function(window, angular, undefined) {'use strict';
 
 /**
  * Module definition and dependencies
@@ -422,7 +422,7 @@ angular.module('Storage.CookieStorage.Service', [])
 
 })(window, window.angular);
 
-(function (window, angular, undefined) {'use strict';
+(function(window, angular, undefined) {'use strict';
 
 /**
  * Module definition and dependencies
@@ -507,7 +507,7 @@ angular.module('Storage.LocalStorage.Service', [])
 
 })(window, window.angular);
 
-(function (window, angular, undefined) {'use strict';
+(function(window, angular, undefined) {'use strict';
 
 /**
  * Module definition and dependencies
@@ -590,7 +590,7 @@ angular.module('Storage.MemoryStorage.Service', [])
 
 })(window, window.angular);
 
-(function (window, angular, undefined) {'use strict';
+(function(window, angular, undefined) {'use strict';
 
 /**
  * Module definition and dependencies
