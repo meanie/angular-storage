@@ -1,5 +1,5 @@
 /**
- * meanie-angular-storage - v1.0.1 - 23-9-2015
+ * meanie-angular-storage - v1.0.2 - 23-9-2015
  * https://github.com/meanie/angular-storage
  *
  * Copyright (c) 2015 Adam Buczynski <me@adambuczynski.com>
