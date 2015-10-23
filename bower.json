@@ -1,6 +1,6 @@
 {
   "name": "meanie-angular-storage",
-  "version": "0.6.5",
+  "version": "0.6.6",
   "main": "./release/meanie-angular-storage.js",
   "ignore": [
     "**/.*",

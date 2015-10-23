@@ -27,7 +27,7 @@ module.exports = function(config) {
     port: 9876,
 
     //Web server URL root
-    urlRoot:   '/',
+    urlRoot: '/',
 
     //Enable / disable colors in the output (reporters and logs)
     colors: true,
