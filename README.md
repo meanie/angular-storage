@@ -6,37 +6,27 @@
 [![codacy](https://img.shields.io/codacy/52a227e315104dc48b9e8d715e23f088.svg)](https://www.codacy.com/app/meanie/angular-storage)
 [![Join the chat at https://gitter.im/meanie/meanie](https://img.shields.io/badge/gitter-join%20chat%20%E2%86%92-brightgreen.svg)](https://gitter.im/meanie/meanie?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-AngularJS module for interacting with local storage, session storage and cookie storage
+An Angular service for interacting with local storage, session storage and cookie storage
 
 The storage service automatically parses objects or arrays to and from JSON, and preserves numbers and integers as well.
 
 ## Installation
 
-You can install this package using `meanie`, `npm` or `bower`.
-
-### meanie
-
-```shell
-meanie install angular-storage
-```
-
-Then add `Storage.Service` as a dependency for your app:
-
-```js
-angular.module('App.MyModule', ['Storage.Service']);
-```
+You can install this package using `npm` or `bower`.
 
 ### npm
 
 ```shell
-npm install meanie-angular-storage
+npm install meanie-angular-storage --save
 ```
 
-Then add as a dependency for your app:
+Include the script `node_modules/meanie-angular-storage/release/meanie-angular-storage.js` in your build process, or add it via a `<script>` tag to your `index.html`:
 
-```js
-angular.module('App.MyModule', [require('meanie-angular-storage')]);
+```html
+<script src="node_modules/meanie-angular-storage/release/meanie-angular-storage.js"></script>
 ```
+
+Add `Storage.Service` as a dependency for your app.
 
 ### bower
 
@@ -44,22 +34,20 @@ angular.module('App.MyModule', [require('meanie-angular-storage')]);
 bower install meanie-angular-storage
 ```
 
-Add a `<script>` to your `index.html`:
+Include the script `bower_components/meanie-angular-storage/release/meanie-angular-storage.js` in your build process, or add it via a `<script>` tag to your `index.html`:
 
 ```html
-<script src="/bower_components/meanie-angular-storage/release/meanie-angular-storage.js"></script>
+<script src="bower_components/meanie-angular-storage/release/meanie-angular-storage.js"></script>
 ```
 
-Then add `Storage.Service` as a dependency for your app:
-
-```js
-angular.module('App.MyModule', ['Storage.Service']);
-```
+Add `Storage.Service` as a dependency for your app.
 
 ## Configuration
 
 ```js
-angular.module('App').config(function($storageProvider, App) {
+angular.module('App', [
+  'Storage.Serice'
+]).config(function($storageProvider, App) {
 
   //Set global prefix for stored keys
   $storageProvider.setPrefix(App.name.toLowerCase());
@@ -121,4 +109,4 @@ If you would like to contribute to Meanie, please check out the [Meanie contribu
 
 (MIT License)
 
-Copyright 2015, [Adam Buczynski](http://adambuczynski.com)
+Copyright 2015-2016, [Adam Buczynski](http://adambuczynski.com)
