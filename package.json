@@ -41,7 +41,7 @@
     "pretest": "npm run lint",
     "test": "karma start karma.conf.js",
     "version": "gulp release && git add release/*",
-    "postversion": "git push && git push --tags"
+    "postversion": "git push && git push --tags && npm publish"
   },
   "dependencies": {
     "angular-cookies": "^1.4.8"
