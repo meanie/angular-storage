@@ -10,6 +10,8 @@ An Angular service for interacting with local storage, session storage and cooki
 
 The storage service automatically parses objects or arrays to and from JSON, and preserves numbers and integers as well.
 
+![Meanie](https://raw.githubusercontent.com/meanie/meanie/master/meanie-logo-full.png)
+
 ## Installation
 
 You can install this package using `npm` or `bower`.
@@ -101,9 +103,11 @@ Please report any bugs, issues, suggestions and feature requests in the [meanie-
 
 ## Contributing
 
-Pull requests are welcome! Please create them against the [dev branch](https://github.com/meanie/angular-storage/tree/dev) of the repository.
+Pull requests are welcome! If you would like to contribute to Meanie, please check out the [Meanie contributing guidelines](https://github.com/meanie/meanie/blob/master/CONTRIBUTING.md).
 
-If you would like to contribute to Meanie, please check out the [Meanie contributing guidelines](https://github.com/meanie/meanie/blob/master/CONTRIBUTING.md).
+## Credits
+
+* Meanie logo designed by [Quan-Lin Sim](mailto:quan.lin.sim+meanie@gmail.com)
 
 ## License
 
