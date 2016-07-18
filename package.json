@@ -33,7 +33,8 @@
     "lint": "eslint . --fix",
     "pretest": "npm run lint",
     "test": "karma start karma.conf.js",
-    "version": "gulp release && git add release/*",
+    "release": "gulp release",
+    "version": "npm run release && git add release/*",
     "postversion": "git push && git push --tags && npm publish"
   },
   "peerDependencies": {
