@@ -1,6 +1,5 @@
 /**
- * meanie-angular-storage - v1.1.4 - 18-6-2016
- * https://github.com/meanie/angular-storage
+ * meanie-angular-storage * https://github.com/meanie/angular-storage
  *
  * Copyright (c) 2016 Adam Buczynski <me@adambuczynski.com>
  * License: MIT
@@ -72,7 +71,7 @@
     /**
      * Service getter
      */
-    this.$get = ['$parse', '$injector', function ($parse, $injector) {
+    this.$get = ['$parse', '$injector', '$log', function ($parse, $injector, $log) {
 
       //Set configuration vars locally
       var storagePrefix = this.prefix;
@@ -107,14 +106,14 @@
         if (engine !== 'memory' && !engineService.isSupported()) {
 
           //Determine fallback
-          var fallback;
+          var fallback = void 0;
           if (angular.isFunction(engineService.getFallbackEngine)) {
             fallback = engineService.getFallbackEngine();
           }
 
           //Validate fallback and log warning
           fallback = fallback || 'memory';
-          console.warn('Storage engine', engine, 'not supported in this browser.', 'Using fallback engine', fallback, 'instead.');
+          $log.warn('Storage engine', engine, 'not supported in this browser.', 'Using fallback engine', fallback, 'instead.');
 
           //Get fallback engine
           engineService = getEngineService(fallback);
@@ -140,6 +139,13 @@
       }
 
       /**
+       * Test if string is a boolean
+       */
+      function isStringBoolean(string) {
+        return string === 'false' || string === 'true';
+      }
+
+      /**
        * Test if a string is an object/array
        */
       function isStringObject(string) {
@@ -157,7 +163,7 @@
         }
 
         //Convert to JSON if not a string
-        if (angular.isObject(value) || angular.isArray(value) || angular.isNumber(+value || value)) {
+        if (angular.isObject(value) || angular.isArray(value) || typeof value === 'boolean' || angular.isNumber(Number(value) || value)) {
           return angular.toJson(value);
         }
 
@@ -176,7 +182,7 @@
         }
 
         //Parse from JSON if needed
-        if (isStringObject(value) || isStringNumber(value)) {
+        if (isStringObject(value) || isStringBoolean(value) || isStringNumber(value)) {
           try {
             return angular.fromJson(value);
           } catch (e) {
@@ -339,14 +345,14 @@
   /**
    * Cookie storage engine service
    */
-  .factory('$cookieStorage', ['$injector', function $cookieStorage($injector) {
+  .factory('$cookieStorage', ['$injector', '$log', function $cookieStorage($injector, $log) {
 
     //Get cookies service
-    var $cookies;
+    var $cookies = void 0;
     if ($injector.has('$cookies')) {
       $cookies = $injector.get('$cookies');
     } else {
-      console.warn('Cookie storage requires the `ngCookies` module as a dependency.');
+      $log.warn('Cookie storage requires the `ngCookies` module as a dependency');
     }
 
     /**
