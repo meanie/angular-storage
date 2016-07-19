@@ -12,7 +12,7 @@ angular.module('Storage.MemoryStorage.Service', [])
   /**
    * Store
    */
-  var memoryStore = {};
+  let memoryStore = {};
 
   /**
    * Storage engine interface
@@ -65,15 +65,15 @@ angular.module('Storage.MemoryStorage.Service', [])
     clear: function(prefix) {
 
       //Get regex for prefix and keys
-      var prefixRegex = prefix ? new RegExp('^' + prefix) : null;
-      var keys = Object.keys(memoryStore);
+      let prefixRegex = prefix ? new RegExp('^' + prefix) : null;
+      let keys = Object.keys(memoryStore);
 
       //Loop keys
-      for (var k = 0; k < keys.length; k++) {
+      for (let k = 0; k < keys.length; k++) {
         if (!prefix || prefixRegex.test(keys[k])) {
           delete memoryStore[keys[k]];
         }
       }
-    }
+    },
   };
 });

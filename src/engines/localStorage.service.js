@@ -20,7 +20,7 @@ angular.module('Storage.LocalStorage.Service', [])
     isSupported: function() {
 
       //Prepare test key
-      var key = '___' + Math.round(Math.random() * 1e7);
+      let key = '___' + Math.round(Math.random() * 1e7);
 
       //Try local storage
       try {
@@ -67,15 +67,15 @@ angular.module('Storage.LocalStorage.Service', [])
     clear: function(prefix) {
 
       //Get regex for prefix and keys
-      var prefixRegex = prefix ? new RegExp('^' + prefix) : null;
-      var keys = Object.keys($window.localStorage);
+      let prefixRegex = prefix ? new RegExp('^' + prefix) : null;
+      let keys = Object.keys($window.localStorage);
 
       //Loop keys
-      for (var k = 0; k < keys.length; k++) {
+      for (let k = 0; k < keys.length; k++) {
         if (!prefix || prefixRegex.test(keys[k])) {
           $window.localStorage.removeItem(keys[k]);
         }
       }
-    }
+    },
   };
 });

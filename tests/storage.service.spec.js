@@ -1,4 +1,4 @@
-/*jshint -W083 */
+/* global inject */
 
 /**
  * Specifications
@@ -10,20 +10,20 @@ describe('Storage', function() {
   beforeEach(module('ngCookies'));
 
   //Inject storage
-  var $storage;
+  let $storage;
   beforeEach(inject(function(_$storage_) {
     $storage = _$storage_;
   }));
 
   //Storage engines
-  var engines = ['memory', 'session', 'local', 'cookie'];
+  let engines = ['memory', 'session', 'local', 'cookie'];
 
   //Loop each engine
-  for (var i = 0; i < engines.length; i++) {
+  for (let i = 0; i < engines.length; i++) {
 
     //Get engine
-    var engine = engines[i];
-    var StorageEngine;
+    let engine = engines[i];
+    let StorageEngine;
     beforeEach(function() {
       StorageEngine = $storage[engine];
     });
@@ -75,7 +75,7 @@ describe('Storage', function() {
       describe('storage', function() {
 
         //Set test key
-        var testKey;
+        let testKey;
         beforeEach(function() {
           testKey = 'test';
         });
@@ -84,9 +84,9 @@ describe('Storage', function() {
          * String values
          */
         it('should be able to store string values', function() {
-          var testValue = 'test';
+          let testValue = 'test';
           StorageEngine.set(testKey, testValue);
-          var storedValue = StorageEngine.get(testKey);
+          let storedValue = StorageEngine.get(testKey);
           expect(storedValue).toBe(testValue);
           expect(typeof storedValue).toBe(typeof testValue);
         });
@@ -98,7 +98,7 @@ describe('Storage', function() {
           StorageEngine.set(testKey, 'a');
           StorageEngine.set(testKey, 'b');
           StorageEngine.set(testKey, 'c');
-          var storedValue = StorageEngine.get(testKey);
+          let storedValue = StorageEngine.get(testKey);
           expect(storedValue).toBe('c');
         });
 
@@ -106,10 +106,23 @@ describe('Storage', function() {
          * Integer values
          */
         it('should be able to store integer values', function() {
-          var testValues = [1, -1, 0];
-          for (var i = 0; i < testValues.length; i++) {
+          let testValues = [1, -1, 0];
+          for (let i = 0; i < testValues.length; i++) {
             StorageEngine.set(testKey, testValues[i]);
-            var storedValue = StorageEngine.get(testKey);
+            let storedValue = StorageEngine.get(testKey);
+            expect(storedValue).toBe(testValues[i]);
+            expect(typeof storedValue).toBe(typeof testValues[i]);
+          }
+        });
+
+        /**
+         * Boolean values
+         */
+        it('should be able to store boolean values', function() {
+          let testValues = [true, false];
+          for (let i = 0; i < testValues.length; i++) {
+            StorageEngine.set(testKey, testValues[i]);
+            let storedValue = StorageEngine.get(testKey);
             expect(storedValue).toBe(testValues[i]);
             expect(typeof storedValue).toBe(typeof testValues[i]);
           }
@@ -119,10 +132,10 @@ describe('Storage', function() {
          * Float values
          */
         it('should be able to store float values', function() {
-          var testValues = [1.234, -1.234, 0.0];
-          for (var i = 0; i < testValues.length; i++) {
+          let testValues = [1.234, -1.234, 0.0];
+          for (let i = 0; i < testValues.length; i++) {
             StorageEngine.set(testKey, testValues[i]);
-            var storedValue = StorageEngine.get(testKey);
+            let storedValue = StorageEngine.get(testKey);
             expect(storedValue).toBe(testValues[i]);
             expect(typeof storedValue).toBe(typeof testValues[i]);
           }
@@ -132,10 +145,10 @@ describe('Storage', function() {
          * Undefined/null values
          */
         it('should return null for undefined and null values', function() {
-          var testValues = [undefined, null];
-          for (var i = 0; i < testValues.length; i++) {
+          let testValues = [undefined, null];
+          for (let i = 0; i < testValues.length; i++) {
             StorageEngine.set(testKey, testValues[i]);
-            var storedValue = StorageEngine.get(testKey);
+            let storedValue = StorageEngine.get(testKey);
             expect(storedValue).toBeNull();
           }
         });
@@ -144,11 +157,11 @@ describe('Storage', function() {
          * Arrays
          */
         it('should be able to store arrays', function() {
-          var testValue = ['a', 1, 1.234, null];
+          let testValue = ['a', 1, 1.234, null];
           StorageEngine.set(testKey, testValue);
-          var storedValue = StorageEngine.get(testKey);
+          let storedValue = StorageEngine.get(testKey);
           expect(storedValue).toEqual(testValue);
-          for (var i = 0; i < testValue.length; i++) {
+          for (let i = 0; i < testValue.length; i++) {
             expect(storedValue).toContain(testValue[i]);
           }
         });
@@ -157,12 +170,12 @@ describe('Storage', function() {
          * Nested arrays
          */
         it('should be able to store nested arrays', function() {
-          var testValue = ['a', 1, ['b', 2, 3.456]];
+          let testValue = ['a', 1, ['b', 2, 3.456]];
           StorageEngine.set(testKey, testValue);
-          var storedValue = StorageEngine.get(testKey);
+          let storedValue = StorageEngine.get(testKey);
           expect(storedValue).toEqual(testValue);
           expect(storedValue[2]).toEqual(testValue[2]);
-          for (var i = 0; i < testValue[2].length; i++) {
+          for (let i = 0; i < testValue[2].length; i++) {
             expect(storedValue[2]).toContain(testValue[2][i]);
           }
         });
@@ -171,7 +184,7 @@ describe('Storage', function() {
          * Object values
          */
         it('should be able to store objects', function() {
-          var testValue = {
+          let testValue = {
             a: 'a',
             b: 1,
             c: 1.234,
@@ -179,11 +192,11 @@ describe('Storage', function() {
             e: {
               f: 'b',
               g: 2,
-              h: ['c', 3, 3.456, null]
-            }
+              h: ['c', 3, 3.456, null],
+            },
           };
           StorageEngine.set(testKey, testValue);
-          var storedValue = StorageEngine.get(testKey);
+          let storedValue = StorageEngine.get(testKey);
           expect(storedValue).toEqual(testValue);
           expect(typeof storedValue).toBe(typeof testValue);
         });
@@ -195,7 +208,7 @@ describe('Storage', function() {
       describe('removal', function() {
 
         //Set test key
-        var testKey;
+        let testKey;
         beforeEach(function() {
           testKey = 'test';
         });
@@ -204,11 +217,11 @@ describe('Storage', function() {
          * Removal
          */
         it('should be able to remove stored values of all types', function() {
-          var testValues = ['a', 1, 1.234, null, {a: 'a'}, ['a', 1]];
-          for (var i = 0; i < testValues.length; i++) {
+          let testValues = ['a', 1, 1.234, null, {a: 'a'}, ['a', 1]];
+          for (let i = 0; i < testValues.length; i++) {
             StorageEngine.set(testKey, testValues[i]);
             StorageEngine.remove(testKey);
-            var storedValue = StorageEngine.get(testKey);
+            let storedValue = StorageEngine.get(testKey);
             expect(storedValue).toBeNull();
           }
         });
@@ -223,15 +236,15 @@ describe('Storage', function() {
          * All values
          */
         it('should clear all set values', function() {
-          var testValue = 'test';
-          var testKeys = ['a', 'b', 'c'];
-          var i;
+          let testValue = 'test';
+          let testKeys = ['a', 'b', 'c'];
+          let i;
           for (i = 0; i < testKeys.length; i++) {
             StorageEngine.set(testKeys[i], testValue);
           }
           StorageEngine.clear();
           for (i = 0; i < testKeys.length; i++) {
-            var storedValue = StorageEngine.get(testKeys[i]);
+            let storedValue = StorageEngine.get(testKeys[i]);
             expect(storedValue).toBeNull();
           }
         });
@@ -240,15 +253,15 @@ describe('Storage', function() {
          * Prefixed values
          */
         it('should clear prefixed values', function() {
-          var testValue = 'test';
-          var testKeys = ['pre.a', 'pre.b', 'pre.c'];
-          var i;
+          let testValue = 'test';
+          let testKeys = ['pre.a', 'pre.b', 'pre.c'];
+          let i;
           for (i = 0; i < testKeys.length; i++) {
             StorageEngine.set(testKeys[i], testValue);
           }
           StorageEngine.clear('pre.');
           for (i = 0; i < testKeys.length; i++) {
-            var storedValue = StorageEngine.get(testKeys[i]);
+            let storedValue = StorageEngine.get(testKeys[i]);
             expect(storedValue).toBeNull();
           }
         });
@@ -257,15 +270,15 @@ describe('Storage', function() {
          * Prefixed values
          */
         it('should only clear prefixed values', function() {
-          var testValue = 'test';
-          var testKeys = ['pre.a', 'pre.b', 'pre.c', 'a', 'b', 'c'];
-          var i;
+          let testValue = 'test';
+          let testKeys = ['pre.a', 'pre.b', 'pre.c', 'a', 'b', 'c'];
+          let i;
           for (i = 0; i < testKeys.length; i++) {
             StorageEngine.set(testKeys[i], testValue);
           }
           StorageEngine.clear('pre.');
           for (i = 0; i < testKeys.length; i++) {
-            var storedValue = StorageEngine.get(testKeys[i]);
+            let storedValue = StorageEngine.get(testKeys[i]);
             if (testKeys[i].length === 1) {
               expect(storedValue).toBe(testValue);
             }

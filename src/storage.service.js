@@ -6,7 +6,7 @@ angular.module('Storage.Service', [
   'Storage.MemoryStorage.Service',
   'Storage.CookieStorage.Service',
   'Storage.SessionStorage.Service',
-  'Storage.LocalStorage.Service'
+  'Storage.LocalStorage.Service',
 ])
 
 /**
@@ -65,15 +65,15 @@ angular.module('Storage.Service', [
   /**
    * Service getter
    */
-  this.$get = function($parse, $injector) {
+  this.$get = function($parse, $injector, $log) {
 
     //Set configuration vars locally
-    var storagePrefix = this.prefix;
-    var enabledStorageEngines = this.enabledStorageEngines;
-    var defaultStorageEngine = this.defaultStorageEngine;
+    let storagePrefix = this.prefix;
+    let enabledStorageEngines = this.enabledStorageEngines;
+    let defaultStorageEngine = this.defaultStorageEngine;
 
     //Cached engine service instances
-    var engineServices = {};
+    let engineServices = {};
 
     /**
      * Get storage engine service name
@@ -93,21 +93,21 @@ angular.module('Storage.Service', [
       }
 
       //Get the engine service
-      var serviceName = getEngineServiceName(engine);
-      var engineService = $injector.get(serviceName);
+      let serviceName = getEngineServiceName(engine);
+      let engineService = $injector.get(serviceName);
 
       //Not supported
       if (engine !== 'memory' && !engineService.isSupported()) {
 
         //Determine fallback
-        var fallback;
+        let fallback;
         if (angular.isFunction(engineService.getFallbackEngine)) {
           fallback = engineService.getFallbackEngine();
         }
 
         //Validate fallback and log warning
         fallback = fallback || 'memory';
-        console.warn(
+        $log.warn(
           'Storage engine', engine, 'not supported in this browser.',
           'Using fallback engine', fallback, 'instead.'
         );
@@ -135,6 +135,13 @@ angular.module('Storage.Service', [
     }
 
     /**
+     * Test if string is a boolean
+     */
+    function isStringBoolean(string) {
+      return (string === 'false' || string === 'true');
+    }
+
+    /**
      * Test if a string is an object/array
      */
     function isStringObject(string) {
@@ -152,7 +159,12 @@ angular.module('Storage.Service', [
       }
 
       //Convert to JSON if not a string
-      if (angular.isObject(value) || angular.isArray(value) || angular.isNumber(+value || value)) {
+      if (
+        angular.isObject(value) ||
+        angular.isArray(value) ||
+        typeof value === 'boolean' ||
+        angular.isNumber(Number(value) || value)
+      ) {
         return angular.toJson(value);
       }
 
@@ -171,7 +183,11 @@ angular.module('Storage.Service', [
       }
 
       //Parse from JSON if needed
-      if (isStringObject(value) || isStringNumber(value)) {
+      if (
+        isStringObject(value) ||
+        isStringBoolean(value) ||
+        isStringNumber(value)
+      ) {
         try {
           return angular.fromJson(value);
         }
@@ -197,7 +213,7 @@ angular.module('Storage.Service', [
 
     //Validate enabled storage engines
     angular.forEach(enabledStorageEngines, function(engine) {
-      var serviceName = getEngineServiceName(engine);
+      let serviceName = getEngineServiceName(engine);
       if (!$injector.has(serviceName)) {
         throw new Error(
           'Storage engine', engine, 'does not exist.',
@@ -213,7 +229,7 @@ angular.module('Storage.Service', [
     /**
      * Storage engine instance constructor
      */
-    var StorageEngine = function(engine) {
+    let StorageEngine = function(engine) {
       this.engine = getEngineService(engine);
     };
 
@@ -259,7 +275,7 @@ angular.module('Storage.Service', [
 
       //Get value and return formatted
       try {
-        var value = this.engine.get(key);
+        let value = this.engine.get(key);
         if (value === null) {
           return defaultValue;
         }
@@ -304,8 +320,8 @@ angular.module('Storage.Service', [
      ***/
 
     //Create default storage engine service and initialize engines cache
-    var Storage = new StorageEngine(defaultStorageEngine);
-    var StorageEngines = {};
+    let Storage = new StorageEngine(defaultStorageEngine);
+    let StorageEngines = {};
 
     //Store ourselves in the cache as the default storage engine
     StorageEngines[defaultStorageEngine] = Storage;
@@ -320,7 +336,7 @@ angular.module('Storage.Service', [
             return StorageEngines[engine];
           }
           return (StorageEngines[engine] = new StorageEngine(engine));
-        }
+        },
       });
     });
 

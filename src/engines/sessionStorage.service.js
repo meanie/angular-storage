@@ -20,7 +20,7 @@ angular.module('Storage.SessionStorage.Service', [])
     isSupported: function() {
 
       //Prepare test key
-      var key = '___' + Math.round(Math.random() * 1e7);
+      let key = '___' + Math.round(Math.random() * 1e7);
 
       //Try session storage
       try {
@@ -67,15 +67,15 @@ angular.module('Storage.SessionStorage.Service', [])
     clear: function(prefix) {
 
       //Get regex for prefix and keys
-      var prefixRegex = prefix ? new RegExp('^' + prefix) : null;
-      var keys = Object.keys($window.sessionStorage);
+      let prefixRegex = prefix ? new RegExp('^' + prefix) : null;
+      let keys = Object.keys($window.sessionStorage);
 
       //Loop keys
-      for (var k = 0; k < keys.length; k++) {
+      for (let k = 0; k < keys.length; k++) {
         if (!prefix || prefixRegex.test(keys[k])) {
           $window.sessionStorage.removeItem(keys[k]);
         }
       }
-    }
+    },
   };
 });

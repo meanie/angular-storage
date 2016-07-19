@@ -7,15 +7,15 @@ angular.module('Storage.CookieStorage.Service', [])
 /**
  * Cookie storage engine service
  */
-.factory('$cookieStorage', function $cookieStorage($injector) {
+.factory('$cookieStorage', function $cookieStorage($injector, $log) {
 
   //Get cookies service
-  var $cookies;
+  let $cookies;
   if ($injector.has('$cookies')) {
     $cookies = $injector.get('$cookies');
   }
   else {
-    console.warn('Cookie storage requires the `ngCookies` module as a dependency.');
+    $log.warn('Cookie storage requires the `ngCookies` module as a dependency');
   }
 
   /**
@@ -64,16 +64,16 @@ angular.module('Storage.CookieStorage.Service', [])
     clear: function(prefix) {
 
       //Get all the cookies and corresponding keys
-      var prefixRegex = prefix ? new RegExp('^' + prefix) : null;
-      var cookies = $cookies.getAll();
-      var keys = cookies ? Object.keys(cookies) : [];
+      let prefixRegex = prefix ? new RegExp('^' + prefix) : null;
+      let cookies = $cookies.getAll();
+      let keys = cookies ? Object.keys(cookies) : [];
 
       //Loop keys
-      for (var k = 0; k < keys.length; k++) {
+      for (let k = 0; k < keys.length; k++) {
         if (!prefix || prefixRegex.test(keys[k])) {
           $cookies.remove(keys[k]);
         }
       }
-    }
+    },
   };
 });

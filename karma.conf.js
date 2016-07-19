@@ -14,8 +14,14 @@ module.exports = function(config) {
       'node_modules/angular-mocks/angular-mocks.js',
       'node_modules/angular-cookies/angular-cookies.js',
       'src/**/*.js',
-      'tests/**/*.spec.js'
+      'tests/**/*.spec.js',
     ],
+
+    //Preprocessors
+    preprocessors: {
+      'src/**/*.js': ['babel'],
+      'tests/**/*.spec.js': ['babel'],
+    },
 
     //Frameworks to use (see https://npmjs.org/browse/keyword/karma-adapter)
     frameworks: ['jasmine'],
@@ -45,6 +51,6 @@ module.exports = function(config) {
     singleRun: true,
 
     //Don't fail on empty test suite
-    failOnEmptyTestSuite: false
+    failOnEmptyTestSuite: false,
   });
 };
