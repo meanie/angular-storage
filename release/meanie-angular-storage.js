@@ -4,8 +4,6 @@
  * Copyright (c) 2016 Adam Buczynski <me@adambuczynski.com>
  * License: MIT
  */
-'use strict';
-
 (function (window, angular, undefined) {
   'use strict';
 
@@ -331,8 +329,6 @@
     }];
   });
 })(window, window.angular);
-'use strict';
-
 (function (window, angular, undefined) {
   'use strict';
 
@@ -415,8 +411,6 @@
     };
   }]);
 })(window, window.angular);
-'use strict';
-
 (function (window, angular, undefined) {
   'use strict';
 
@@ -501,8 +495,6 @@
     };
   }]);
 })(window, window.angular);
-'use strict';
-
 (function (window, angular, undefined) {
   'use strict';
 
@@ -586,8 +578,6 @@
     };
   });
 })(window, window.angular);
-'use strict';
-
 (function (window, angular, undefined) {
   'use strict';
 
