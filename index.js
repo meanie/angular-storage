@@ -1,2 +1,2 @@
-require('./release/meanie-angular-storage.js');
+require('./release/angular-storage.js');
 module.exports = 'Storage.Service';

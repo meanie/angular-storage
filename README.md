@@ -1,6 +1,6 @@
-# meanie-angular-storage
+# @meanie/angular-storage
 
-[![npm version](https://img.shields.io/npm/v/meanie-angular-storage.svg)](https://www.npmjs.com/package/meanie-angular-storage)
+[![npm version](https://img.shields.io/npm/v/@meanie/angular-storage.svg)](https://www.npmjs.com/package/@meanie/angular-storage)
 [![node dependencies](https://david-dm.org/meanie/angular-storage.svg)](https://david-dm.org/meanie/angular-storage)
 [![github issues](https://img.shields.io/github/issues/meanie/angular-storage.svg)](https://github.com/meanie/angular-storage/issues)
 [![codacy](https://img.shields.io/codacy/52a227e315104dc48b9e8d715e23f088.svg)](https://www.codacy.com/app/meanie/angular-storage)
@@ -14,16 +14,20 @@ The storage service automatically parses objects or arrays to and from JSON, and
 
 ## Installation
 
-You can install this package using `npm`:
+You can install this package using `yarn` or `npm`:
 
 ```shell
-npm install meanie-angular-storage --save
+#yarn
+yarn add @meanie/angular-storage
+
+#npm
+npm install @meanie/angular-storage --save
 ```
 
-Include the script `node_modules/meanie-angular-storage/release/meanie-angular-storage.js` in your build process, or add it via a `<script>` tag to your `index.html`:
+Include the script `node_modules/@meanie/angular-storage/release/angular-storage.js` in your build process, or add it via a `<script>` tag to your `index.html`:
 
 ```html
-<script src="node_modules/meanie-angular-storage/release/meanie-angular-storage.js"></script>
+<script src="node_modules/@meanie/angular-storage/release/angular-storage.js"></script>
 ```
 
 Add `Storage.Service` as a dependency for your app.
@@ -83,7 +87,7 @@ angular.module('App.MyModule').controller('MyController', function($storage) {
 
 ## Issues & feature requests
 
-Please report any bugs, issues, suggestions and feature requests in the [meanie-angular-storage issue tracker](https://github.com/meanie/angular-storage/issues).
+Please report any bugs, issues, suggestions and feature requests in the [@meanie/angular-storage issue tracker](https://github.com/meanie/angular-storage/issues).
 
 ## Contributing
 
@@ -97,4 +101,4 @@ Pull requests are welcome! If you would like to contribute to Meanie, please che
 
 (MIT License)
 
-Copyright 2015-2017, [Adam Reis](http://adam.reis.nz)
+Copyright 2015-2017, [Adam Reis](https://adam.reis.nz)
