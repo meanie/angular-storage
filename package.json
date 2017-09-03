@@ -1,7 +1,7 @@
 {
   "name": "@meanie/angular-storage",
   "description": "An Angular service for interacting with local storage, session storage and cookie storage",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "homepage": "https://github.com/meanie/angular-storage",
   "author": {
     "name": "Adam Reis",
