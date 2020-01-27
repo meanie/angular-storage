@@ -1,7 +1,7 @@
 /**
  * @meanie/angular-storage * https://github.com/meanie/angular-storage
  *
- * Copyright (c) 2017 Adam Reis <adam@reis.nz>
+ * Copyright (c) 2020 Adam Reis <adam@reis.nz>
  * License: MIT
  */
 (function (window, angular, undefined) {
